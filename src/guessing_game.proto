@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package guessing_game;
+
+
+service GuessingGame { // service ran on the server
+  rpc reply (Guess) returns (Feedback) {}
+  rpc tell_name (Name) returns (Name) {}
+  rpc check_state(Name) returns (GameState) {}
+  rpc update_state(Name) returns (GameState) {}
+}
+
+message GameState { 
+	string state = 1;
+
+}
+
+message Guess {
+  int32 guess = 1;
+}
+
+message Feedback{
+	string feed = 1;
+
+}
+
+message Name {
+  string name = 1;
+}
+
