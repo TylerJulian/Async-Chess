@@ -1,6 +1,6 @@
 FROM ubuntu:rolling
 
-MAINTAINER harry@hogwarts.edu
+MAINTAINER tyler.james.julian@ou.edu
 
 ARG DEBIAN_FRONTEND=noninteractive
 

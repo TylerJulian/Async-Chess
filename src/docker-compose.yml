@@ -7,18 +7,26 @@ services:
     container_name: Server
     networks:
       - default
+# names are in the following format x##$$ (x = piece b,r,k,p,n) (# = horizontal spot) ($$ = vertical spot)
   client1:
     build: .
-    hostname: alice
-    container_name: Alice
+    hostname: r1101
+    container_name: r1101
     networks:
       - default
   client2:
     build: .
-    hostname: bob
-    container_name: Bob
+    hostname: r1801
+    container_name: r1801
     networks:
       - default
+  client3:
+    build: .
+    hostname: k1501
+    container_name: k1501
+    networks:
+      - default
+
 
 networks:
   default:
