@@ -1,0 +1,6 @@
+Tyler Julian, tyler.james.julian@ou.edu, CS 5113
+I didn't work with anybody from the class or outside the class.
+https://docs.docker.com/engine/reference/builder/ I had issues with the dockerfile initially, but fixed it using the docker docs
+https://grpc.github.io/grpc/python, Grpc docs that I used as a tutorial
+https://github.com/grpc/grpc/tree/v1.20.0/examples/python/helloworld, I based my code around the examples here
+I used Dr. Grant's example from the lectures to help fix some of my issues that came up. I used his example of using the socket library to determine the hostnames. 
