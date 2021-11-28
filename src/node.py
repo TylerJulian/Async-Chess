@@ -13,7 +13,7 @@ ran_num = random.randint(0, 100000)
 import guessing_game_pb2_grpc
 import guessing_game_pb2
 
-
+import achess
 
 
 
@@ -53,6 +53,7 @@ def server():
 
 def client():
 	time.sleep(1)
+	game = achess.aChessClient("test")
 	ongoing = True
 	count = 0
 	
@@ -78,7 +79,8 @@ def client():
 	print("I am done!")
 	time.sleep(1)
 	with grpc.insecure_channel('server:50051') as channel:		
-		stub = guessing_game_pb2_grpc.GuessingGameStub(channel)
+		stub = gue
+		ssing_game_pb2_grpc.GuessingGameStub(channel)
 		response = stub.check_state(guessing_game_pb2.GameState(state = stat))
 		while (response.state != "over"):
 			response = stub.check_state(guessing_game_pb2.GameState(state = stat))

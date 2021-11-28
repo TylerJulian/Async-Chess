@@ -10,11 +10,30 @@ service GuessingGame { // service ran on the server
   rpc tell_name (Name) returns (Name) {}
   rpc check_state(Name) returns (GameState) {}
   rpc update_state(Name) returns (GameState) {}
+  rpc print_board(Name) returns (GameState) {}
 }
 
 message GameState { 
 	string state = 1;
+}
+message row{
+	repeated string item = 1;
+}
+message board {
+	repeated row board_row = 1;
+}
 
+message acknowledge{
+	string state = 1; // on, won, over
+	bool moving = 2; // yes, no
+	bool legal = 3; // yes, no
+	bool moved = 4; // yes, no if the piece actually moved
+	string check = 5; // no, or position of checking
+	string location = 6; // last location of piece
+	string new_location = 7; // new location of piece
+	bool kill = 8; // stop the node if kill is true (dead piece)
+	string color = 9; // color of your piece
+	// add more when needed 
 }
 
 message Guess {
