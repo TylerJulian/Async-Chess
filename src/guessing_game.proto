@@ -9,7 +9,9 @@ service GuessingGame { // service ran on the server
   rpc reply (Guess) returns (Feedback) {}
   rpc tell_name (Name) returns (Name) {}
   rpc check_state(Name) returns (GameState) {}
+  rpc make_move(Name) returns (GameState) {}
   rpc update_state(Name) returns (GameState) {}
+  rpc update_board(move) returns (GameState) {}
   rpc print_board(Name) returns (GameState) {}
 }
 
@@ -21,6 +23,10 @@ message row{
 }
 message board {
 	repeated row board_row = 1;
+}
+
+message move{
+    string move = 1;
 }
 
 message acknowledge{

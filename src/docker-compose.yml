@@ -10,23 +10,36 @@ services:
 # names are in the following format x##$$ (x = piece b,r,k,p,n) (# = horizontal spot) ($$ = vertical spot)
   client1:
     build: .
-    hostname: r1200
-    container_name: r1200
+    hostname: k1600w
+    container_name: k1600w
     networks:
       - default
   client2:
     build: .
-    hostname: r2300
-    container_name: r2300
+    hostname: r1200w
+    container_name: r1200w
     networks:
       - default
   client3:
     build: .
-    hostname: k1600
-    container_name: k1600
+    hostname: n1300w
+    container_name: n1300w
+    networks:
+      - default
+  client4:
+    build: .
+    hostname: b1400w
+    container_name: b1400x
+    networks:
+      - default
+  client5:
+    build: .
+    hostname: q1500w
+    container_name: q1500w
     networks:
       - default
 
+      
 
 networks:
   default:

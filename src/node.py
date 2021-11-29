@@ -53,37 +53,20 @@ def server():
 
 def client():
 	time.sleep(1)
-	game = achess.aChessClient("test")
-	ongoing = True
-	count = 0
+	name = socket.gethostname()
+	type_of_piece = name[0]
+	location = name[1:3]
 	
-	low = 0
-	high = 100000
+	game = achess.aChessClient(name)
+	ongoing = True
+
 	response = ""
 	while(ongoing == True):
-		time.sleep(.1)
-		ran_num = random.randint(low, high)
 		with grpc.insecure_channel('server:50051') as channel:
 			stub = guessing_game_pb2_grpc.GuessingGameStub(channel)
-			guess = guessing_game_pb2.Guess(guess = ran_num)
-			response =  stub.reply(guess)
-		
-			print("Guess: " + str(ran_num) + " response: " + response.feed)
-			if (response.feed == "correct"):
-				response = stub.update_state(guessing_game_pb2.Name(name = socket.gethostname()))
-				ongoing = False
-			elif(response.feed == "low"):
-				low = ran_num + 1
-			elif(response.feed == "high"):
-				high = ran_num - 1
-	print("I am done!")
-	time.sleep(1)
-	with grpc.insecure_channel('server:50051') as channel:		
-		stub = gue
-		ssing_game_pb2_grpc.GuessingGameStub(channel)
-		response = stub.check_state(guessing_game_pb2.GameState(state = stat))
-		while (response.state != "over"):
-			response = stub.check_state(guessing_game_pb2.GameState(state = stat))
+			print(game.move())
+			
+			ongoing = False
 		
 
 # main function
