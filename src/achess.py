@@ -56,9 +56,8 @@ class aChessServer():
     size = 32
 
     board = numpy.empty((32,32), dtype = '|S6')
-    name = ""
-    type_of_piece = ""
     locations = {}
+    
     def __init__(self, name):
         print(name)
     def set_piece(self, name):
