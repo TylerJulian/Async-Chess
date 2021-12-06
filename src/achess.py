@@ -56,6 +56,9 @@ class aChessServer():
     size = 32
 
     board = numpy.empty((32,32), dtype = '|S6')
+    for x in range(32):
+        for y in range(32):
+            board[x][y] = "x"
     locations = {}
     
     def __init__(self, name):
@@ -66,4 +69,39 @@ class aChessServer():
         self.locations[name] = (x,y)
         #del locations[name]
 
-    
+    def print_board(self):
+        board_str = ""
+        for x in range(32):
+            for y in range(32):
+                symbol = self.board[31 - y][31 - x].decode('UTF-8')
+                print(x,y)
+                symbol = self.convert_symbol(symbol)
+                board_str += symbol
+            board_str += "\n"
+        print(board_str)
+        
+    def convert_symbol(self, name):
+        piece = name[0:1]
+        color = name[5:6]
+        code = 0
+        if (piece == ''):
+            code = 0
+        elif (piece == 'k'):
+            code = 2654
+        elif (piece == 'q'):
+            code = 2655
+        elif (piece == 'r'):
+            code = 2656
+        elif (piece == 'b'):
+            code = 2657   
+        elif (piece == 'n'):
+            code = 2658
+        elif (piece == 'p'):
+            code = 2659
+        if (color == 'b'):
+            code = code + 6
+        if (code != 0):
+            code = str(code).encode("UTF-8").decode("UTF-8") + "|"
+        else:
+            code = " |"
+        return code

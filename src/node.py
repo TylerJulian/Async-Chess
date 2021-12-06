@@ -55,9 +55,10 @@ def server():
 
 	print("server started")
 	time.sleep(15)
-	print(chess_server.board)
-	print(chess_server.locations)
-	server.stop(10)
+	#print(chess_server.board)
+	#print(chess_server.locations)
+	chess_server.print_board()
+	server.stop(3)
 	#server.wait_for_termination()
 
 def client():
@@ -76,7 +77,7 @@ def client():
 			name = guessing_game_pb2.Name(name = name)
 			
 			response = stub.set_piece(name)
-			print(game.move())
+			#print(game.move())
 			
 			ongoing = False
 		
