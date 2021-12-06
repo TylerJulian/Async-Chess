@@ -1,5 +1,6 @@
 sudo apt install docker.io
 #sudo systemctl enable --now docker
+sudo pip3 install numpy
 
 sudo /etc/init.d/docker start 
 sudo usermod -aG docker $USER

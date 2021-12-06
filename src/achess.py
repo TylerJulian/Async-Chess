@@ -1,4 +1,6 @@
 import random
+import numpy
+
 def parse_move(move):
     piece = move[0]
     x = int(move[1:3])
@@ -10,6 +12,10 @@ def encode_move(piece, x, y):
     move += str(x).zfill(2)
     move += str(y).zfill(2)
     return move
+def inrange(x, y):
+    if (-1 < x < 32) & (-1 < y < 32):
+        return True
+    return False
 
 
 class aChessClient():
@@ -25,11 +31,10 @@ class aChessClient():
     
     #print(board)
     def __init__(self, name):
-        self.name = name[0:5]
+        self.name = name[0:6]
         self.location = name[1:4]
         self.type_of_piece, self.locationx, self.locationy = parse_move(self.name)
         
-        print(self.name)
 
     def move(self):
         x = self.locationx
@@ -40,14 +45,26 @@ class aChessClient():
        
             x = self.locationx + x
             y = self.locationy + y
-            if(not self.inrange(x,y)):
+            if(not inrange(x,y)):
                 x = self.locationx
                 y = self.locationy
                 
         new_move = encode_move(self.type_of_piece, x, y)
         return new_move
         
-    def inrange(self, x, y):
-        if (-1 < x < 32) & (-1 < y < 32):
-            return True
-        return False
+class aChessServer():
+    size = 32
+
+    board = numpy.empty((32,32), dtype = '|S6')
+    name = ""
+    type_of_piece = ""
+    locations = {}
+    def __init__(self, name):
+        print(name)
+    def set_piece(self, name):
+        piece, x, y = parse_move(name)
+        self.board[x][y] = name
+        self.locations[name] = (x,y)
+        #del locations[name]
+
+    

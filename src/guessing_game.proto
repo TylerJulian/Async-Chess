@@ -13,6 +13,7 @@ service GuessingGame { // service ran on the server
   rpc update_state(Name) returns (GameState) {}
   rpc update_board(move) returns (GameState) {}
   rpc print_board(Name) returns (GameState) {}
+  rpc set_piece(Name) returns (Name) {}
 }
 
 message GameState { 

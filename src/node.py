@@ -39,15 +39,24 @@ class GuessingGame(guessing_game_pb2_grpc.GuessingGameServicer):
 		if (stat == "won"):
 			stat = "over"
 		return guessing_game_pb2.GameState(state = stat)
-
+	def set_piece(self, request, context):
+	    name = request.name
+	    piece, x, y = achess.parse_move(name)
+	    chess_server.set_piece(name)
+	    return request
+	        
+chess_server = achess.aChessServer(socket.gethostname())
 def server():
 	
 	server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 	guessing_game_pb2_grpc.add_GuessingGameServicer_to_server(GuessingGame(), server)
 	server.add_insecure_port('[::]:50051')
 	server.start()
+
 	print("server started")
 	time.sleep(15)
+	print(chess_server.board)
+	print(chess_server.locations)
 	server.stop(10)
 	#server.wait_for_termination()
 
@@ -64,6 +73,9 @@ def client():
 	while(ongoing == True):
 		with grpc.insecure_channel('server:50051') as channel:
 			stub = guessing_game_pb2_grpc.GuessingGameStub(channel)
+			name = guessing_game_pb2.Name(name = name)
+			
+			response = stub.set_piece(name)
 			print(game.move())
 			
 			ongoing = False
