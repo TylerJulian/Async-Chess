@@ -54,7 +54,7 @@ def server():
 	server.start()
 
 	print("server started")
-	time.sleep(15)
+	time.sleep(5)
 	#print(chess_server.board)
 	#print(chess_server.locations)
 	chess_server.print_board()

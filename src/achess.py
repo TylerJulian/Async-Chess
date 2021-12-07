@@ -1,5 +1,6 @@
 import random
 import numpy
+#docs.python.org/3/howto/unicode.html
 
 def parse_move(move):
     piece = move[0]
@@ -73,7 +74,7 @@ class aChessServer():
         board_str = ""
         for x in range(32):
             for y in range(32):
-                symbol = self.board[31 - y][31 - x].decode('UTF-8')
+                symbol = self.board[y][31 - x].decode('UTF-8')
                 print(x,y)
                 symbol = self.convert_symbol(symbol)
                 board_str += symbol
@@ -87,21 +88,23 @@ class aChessServer():
         if (piece == ''):
             code = 0
         elif (piece == 'k'):
-            code = 2654
+            code = 0x2654
         elif (piece == 'q'):
-            code = 2655
+            code = 0x2655
         elif (piece == 'r'):
-            code = 2656
+            code = 0x2656
         elif (piece == 'b'):
-            code = 2657   
+            code = 0x2657   
         elif (piece == 'n'):
-            code = 2658
+            code = 0x2658
         elif (piece == 'p'):
-            code = 2659
+            code = 0x2659
         if (color == 'b'):
             code = code + 6
         if (code != 0):
-            code = str(code).encode("UTF-8").decode("UTF-8") + "|"
+            code = chr(code)
+            code.encode("UTF-8")
+            code = code  + str("|")
         else:
             code = " |"
         return code

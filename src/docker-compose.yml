@@ -16,28 +16,11 @@ services:
       - default
   client2:
     build: .
-    hostname: r1200w
-    container_name: r1200w
+    hostname: k1631b
+    container_name: r1631b
     networks:
       - default
-  client3:
-    build: .
-    hostname: n1300w
-    container_name: n1300w
-    networks:
-      - default
-  client4:
-    build: .
-    hostname: b1400w
-    container_name: b1400x
-    networks:
-      - default
-  client5:
-    build: .
-    hostname: q1500w
-    container_name: q1500w
-    networks:
-      - default
+
 
       
 
