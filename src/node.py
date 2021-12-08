@@ -39,7 +39,7 @@ def server():
     x = 0
     while(chess_server.state == "ongoing"):
         x = x + 1
-        if(x == 5):
+        if(x == 2):
             chess_server.print_board()
             x = 0
         time.sleep(1)
@@ -71,7 +71,7 @@ def client():
                 game.update_move(moved)
                 move = guessing_game_pb2.new_move(name = client_name, new_move = move)
                 move = stub.move(move)
-                if count == 10000:
+                if count == 1000000:
                     ongoing = False
                 else: 
                     count = count + 1

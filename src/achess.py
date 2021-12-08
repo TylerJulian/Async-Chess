@@ -94,16 +94,10 @@ class aChessServer():
                 self.board[x][y] = name
                 self.board[ox][oy] = b'x'
                 self.locations[name] = (x, y)
-                
-                print("last known location:")
-                print(self.locations[occupied.decode('UTF-8')])
                 self.locations[occupied.decode('UTF-8')] = (-1,-1)
                 print(occupied.decode('UTF-8'))
                 occupied = occupied.decode('UTF-8')
                 if (occupied[0:1] == 'k'):
-                    print(self.locations[name])
-                    print(self.locations[occupied])
-                    print(self.locations)
                     self.state = "over"
                     self.print_board()
                 return True
