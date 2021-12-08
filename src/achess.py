@@ -79,6 +79,8 @@ class aChessServer():
         piece, x, y = parse_move(move)
         
         ox,oy = self.locations[name] # old x old y
+        if(ox == -1):
+            return "kill"
         if (self.board[x][y] == b'x'):
             self.board[x][y] = name
             self.board[ox][oy] = b'x'

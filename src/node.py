@@ -27,8 +27,15 @@ class GuessingGame(guessing_game_pb2_grpc.GuessingGameServicer):
         chess_server.set_piece(name)
         return guessing_game_pb2.acknowledge()
     def move(self, request, context):
-        chess_server.update_location(request.name, request.new_move)
-        return guessing_game_pb2.acknowledge()
+        move = chess_server.update_location(request.name, request.new_move)
+        
+        if(move == "kill"):
+            move = False
+            kill = True
+        else:
+            kill = False
+
+        return guessing_game_pb2.acknowledge(state = chess_server.state, moved = move)
 
 def server():
     print("hello")
@@ -63,20 +70,23 @@ def client():
         response = stub.set_piece(name)
     count = 0
     while(ongoing == True):
-        try:
-            with grpc.insecure_channel('server:50051') as channel:
-                stub = guessing_game_pb2_grpc.GuessingGameStub(channel)
-                move = game.move()
-                moved = move
+
+        with grpc.insecure_channel('server:50051') as channel:
+            stub = guessing_game_pb2_grpc.GuessingGameStub(channel)
+            move = game.move()
+            moved = move
+            game.update_move(moved)
+            move = guessing_game_pb2.new_move(name = client_name, new_move = move)
+            move = stub.move(move)
+            if(move.moved == True): # check if the piece actually moved.
                 game.update_move(moved)
-                move = guessing_game_pb2.new_move(name = client_name, new_move = move)
-                move = stub.move(move)
-                if count == 1000000:
-                    ongoing = False
-                else: 
-                    count = count + 1
-        except:
-            ongoing = False
+            if(move.kill == True):
+                ongoing = False
+            if(move.state != "ongoing"):
+                ongoing = False
+            else: 
+                count = count + 1
+        
 	    
 
     # main function
