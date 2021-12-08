@@ -21,6 +21,7 @@ def inrange(x, y):
 
 class aChessClient():
     size = 32
+    
     rows, cols = (size, size)
     board = [[0]*cols]*rows
     
@@ -58,7 +59,7 @@ class aChessClient():
         return move
 class aChessServer():
     size = 32
-
+    state = "ongoing" # over # ending
     board = numpy.empty((32,32), dtype = '|S6')
     for x in range(32):
         for y in range(32):
@@ -74,12 +75,39 @@ class aChessServer():
         self.locations[name] = (x,y)
         #del locations[name]
     def update_location(self, name, move):
+        #print("debug 1")
         piece, x, y = parse_move(move)
         
-        ox,oy = self.locations[name]
-        self.board[ox][oy] = "x"
-        self.board[x][y] = name
-        self.locations[name] =(x, y)
+        ox,oy = self.locations[name] # old x old y
+        if (self.board[x][y] == b'x'):
+            self.board[x][y] = name
+            self.board[ox][oy] = b'x'
+            self.locations[name] =(x, y)
+            return True
+        else:
+            occupied = self.board[x][y]
+            if (occupied[5:6] == name[5:6]):
+                return False
+            else:
+                if(occupied.decode('UTF-8') == name):
+                    return False 
+                self.board[x][y] = name
+                self.board[ox][oy] = b'x'
+                self.locations[name] = (x, y)
+                
+                print("last known location:")
+                print(self.locations[occupied.decode('UTF-8')])
+                self.locations[occupied.decode('UTF-8')] = (-1,-1)
+                print(occupied.decode('UTF-8'))
+                occupied = occupied.decode('UTF-8')
+                if (occupied[0:1] == 'k'):
+                    print(self.locations[name])
+                    print(self.locations[occupied])
+                    print(self.locations)
+                    self.state = "over"
+                    self.print_board()
+                return True
+            return False
 
     def print_board(self):
         board_str = ""

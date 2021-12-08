@@ -36,12 +36,13 @@ def server():
     guessing_game_pb2_grpc.add_GuessingGameServicer_to_server(GuessingGame(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
-
-    print("server started")
-    time.sleep(10)
-    #print(chess_server.board)
-    #print(chess_server.locations)
-    chess_server.print_board()
+    x = 0
+    while(chess_server.state == "ongoing"):
+        x = x + 1
+        if(x == 5):
+            chess_server.print_board()
+            x = 0
+        time.sleep(1)
     server.stop(3)
     #server.wait_for_termination()
 
@@ -62,17 +63,20 @@ def client():
         response = stub.set_piece(name)
     count = 0
     while(ongoing == True):
-    
-        with grpc.insecure_channel('server:50051') as channel:
-            stub = guessing_game_pb2_grpc.GuessingGameStub(channel)
-            move = game.move()
-            game.update_move(move)
-            move = guessing_game_pb2.new_move(name = client_name, new_move = move)
-            move = stub.move(move)
-            if count == 100:
-                ongoing = False
-            else: 
-                count = count + 1
+        try:
+            with grpc.insecure_channel('server:50051') as channel:
+                stub = guessing_game_pb2_grpc.GuessingGameStub(channel)
+                move = game.move()
+                moved = move
+                game.update_move(moved)
+                move = guessing_game_pb2.new_move(name = client_name, new_move = move)
+                move = stub.move(move)
+                if count == 10000:
+                    ongoing = False
+                else: 
+                    count = count + 1
+        except:
+            ongoing = False
 	    
 
     # main function
