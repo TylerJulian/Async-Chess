@@ -19,40 +19,10 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'P\001',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13guessing_game.proto\x12\rguessing_game\"4\n\tGameState\"\'\n\x05state\x12\x0b\n\x07ongoing\x10\x00\x12\x07\n\x03won\x10\x01\x12\x08\n\x04over\x10\x02\"\x16\n\x05Guess\x12\r\n\x05guess\x18\x01 \x01(\x05\"\x18\n\x08\x46\x65\x65\x64\x62\x61\x63k\x12\x0c\n\x04\x66\x65\x65\x64\x18\x01 \x01(\t\"\x14\n\x04Name\x12\x0c\n\x04name\x18\x01 \x01(\t2\x81\x01\n\x0cGuessingGame\x12\x38\n\x05reply\x12\x14.guessing_game.Guess\x1a\x17.guessing_game.Feedback\"\x00\x12\x37\n\ttell_name\x12\x13.guessing_game.Name\x1a\x13.guessing_game.Name\"\x00\x42\x02P\x01\x62\x06proto3'
+  serialized_pb=b'\n\x13guessing_game.proto\x12\rguessing_game\"\x1a\n\tGameState\x12\r\n\x05state\x18\x01 \x01(\t\"\x13\n\x03row\x12\x0c\n\x04item\x18\x01 \x03(\t\".\n\x05\x62oard\x12%\n\tboard_row\x18\x01 \x03(\x0b\x32\x12.guessing_game.row\"\"\n\x04move\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04move\x18\x02 \x01(\t\"\x91\x02\n\x0b\x61\x63knowledge\x12\x12\n\x05state\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x13\n\x06moving\x18\x02 \x01(\x08H\x01\x88\x01\x01\x12\x12\n\x05legal\x18\x03 \x01(\x08H\x02\x88\x01\x01\x12\x12\n\x05moved\x18\x04 \x01(\x08H\x03\x88\x01\x01\x12\x12\n\x05\x63heck\x18\x05 \x01(\tH\x04\x88\x01\x01\x12\x15\n\x08location\x18\x06 \x01(\tH\x05\x88\x01\x01\x12\x19\n\x0cnew_location\x18\x07 \x01(\tH\x06\x88\x01\x01\x12\x11\n\x04kill\x18\x08 \x01(\x08H\x07\x88\x01\x01\x42\x08\n\x06_stateB\t\n\x07_movingB\x08\n\x06_legalB\x08\n\x06_movedB\x08\n\x06_checkB\x0b\n\t_locationB\x0f\n\r_new_locationB\x07\n\x05_kill\"\x16\n\x05Guess\x12\r\n\x05guess\x18\x01 \x01(\x05\"\x18\n\x08\x46\x65\x65\x64\x62\x61\x63k\x12\x0c\n\x04\x66\x65\x65\x64\x18\x01 \x01(\t\"\x14\n\x04Name\x12\x0c\n\x04name\x18\x01 \x01(\t2\xce\x02\n\x0cGuessingGame\x12@\n\x0b\x63heck_state\x12\x13.guessing_game.Name\x1a\x1a.guessing_game.acknowledge\"\x00\x12>\n\tmake_move\x12\x13.guessing_game.Name\x1a\x1a.guessing_game.acknowledge\"\x00\x12\x41\n\x0cupdate_state\x12\x13.guessing_game.Name\x1a\x1a.guessing_game.acknowledge\"\x00\x12@\n\x0bprint_board\x12\x13.guessing_game.Name\x1a\x1a.guessing_game.acknowledge\"\x00\x12\x37\n\tset_piece\x12\x13.guessing_game.Name\x1a\x13.guessing_game.Name\"\x00\x42\x02P\x01\x62\x06proto3'
 )
 
 
-
-_GAMESTATE_STATE = _descriptor.EnumDescriptor(
-  name='state',
-  full_name='guessing_game.GameState.state',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ongoing', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='won', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='over', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=51,
-  serialized_end=90,
-)
-_sym_db.RegisterEnumDescriptor(_GAMESTATE_STATE)
 
 
 _GAMESTATE = _descriptor.Descriptor(
@@ -63,12 +33,18 @@ _GAMESTATE = _descriptor.Descriptor(
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
+    _descriptor.FieldDescriptor(
+      name='state', full_name='guessing_game.GameState.state', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
-    _GAMESTATE_STATE,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -77,7 +53,231 @@ _GAMESTATE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=38,
-  serialized_end=90,
+  serialized_end=64,
+)
+
+
+_ROW = _descriptor.Descriptor(
+  name='row',
+  full_name='guessing_game.row',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='item', full_name='guessing_game.row.item', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=66,
+  serialized_end=85,
+)
+
+
+_BOARD = _descriptor.Descriptor(
+  name='board',
+  full_name='guessing_game.board',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='board_row', full_name='guessing_game.board.board_row', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=87,
+  serialized_end=133,
+)
+
+
+_MOVE = _descriptor.Descriptor(
+  name='move',
+  full_name='guessing_game.move',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='guessing_game.move.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='move', full_name='guessing_game.move.move', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=135,
+  serialized_end=169,
+)
+
+
+_ACKNOWLEDGE = _descriptor.Descriptor(
+  name='acknowledge',
+  full_name='guessing_game.acknowledge',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='state', full_name='guessing_game.acknowledge.state', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='moving', full_name='guessing_game.acknowledge.moving', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='legal', full_name='guessing_game.acknowledge.legal', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='moved', full_name='guessing_game.acknowledge.moved', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='check', full_name='guessing_game.acknowledge.check', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='location', full_name='guessing_game.acknowledge.location', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='new_location', full_name='guessing_game.acknowledge.new_location', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='kill', full_name='guessing_game.acknowledge.kill', index=7,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_state', full_name='guessing_game.acknowledge._state',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_moving', full_name='guessing_game.acknowledge._moving',
+      index=1, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_legal', full_name='guessing_game.acknowledge._legal',
+      index=2, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_moved', full_name='guessing_game.acknowledge._moved',
+      index=3, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_check', full_name='guessing_game.acknowledge._check',
+      index=4, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_location', full_name='guessing_game.acknowledge._location',
+      index=5, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_new_location', full_name='guessing_game.acknowledge._new_location',
+      index=6, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_kill', full_name='guessing_game.acknowledge._kill',
+      index=7, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=172,
+  serialized_end=445,
 )
 
 
@@ -108,8 +308,8 @@ _GUESS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=92,
-  serialized_end=114,
+  serialized_start=447,
+  serialized_end=469,
 )
 
 
@@ -140,8 +340,8 @@ _FEEDBACK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=116,
-  serialized_end=140,
+  serialized_start=471,
+  serialized_end=495,
 )
 
 
@@ -172,12 +372,40 @@ _NAME = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=142,
-  serialized_end=162,
+  serialized_start=497,
+  serialized_end=517,
 )
 
-_GAMESTATE_STATE.containing_type = _GAMESTATE
+_BOARD.fields_by_name['board_row'].message_type = _ROW
+_ACKNOWLEDGE.oneofs_by_name['_state'].fields.append(
+  _ACKNOWLEDGE.fields_by_name['state'])
+_ACKNOWLEDGE.fields_by_name['state'].containing_oneof = _ACKNOWLEDGE.oneofs_by_name['_state']
+_ACKNOWLEDGE.oneofs_by_name['_moving'].fields.append(
+  _ACKNOWLEDGE.fields_by_name['moving'])
+_ACKNOWLEDGE.fields_by_name['moving'].containing_oneof = _ACKNOWLEDGE.oneofs_by_name['_moving']
+_ACKNOWLEDGE.oneofs_by_name['_legal'].fields.append(
+  _ACKNOWLEDGE.fields_by_name['legal'])
+_ACKNOWLEDGE.fields_by_name['legal'].containing_oneof = _ACKNOWLEDGE.oneofs_by_name['_legal']
+_ACKNOWLEDGE.oneofs_by_name['_moved'].fields.append(
+  _ACKNOWLEDGE.fields_by_name['moved'])
+_ACKNOWLEDGE.fields_by_name['moved'].containing_oneof = _ACKNOWLEDGE.oneofs_by_name['_moved']
+_ACKNOWLEDGE.oneofs_by_name['_check'].fields.append(
+  _ACKNOWLEDGE.fields_by_name['check'])
+_ACKNOWLEDGE.fields_by_name['check'].containing_oneof = _ACKNOWLEDGE.oneofs_by_name['_check']
+_ACKNOWLEDGE.oneofs_by_name['_location'].fields.append(
+  _ACKNOWLEDGE.fields_by_name['location'])
+_ACKNOWLEDGE.fields_by_name['location'].containing_oneof = _ACKNOWLEDGE.oneofs_by_name['_location']
+_ACKNOWLEDGE.oneofs_by_name['_new_location'].fields.append(
+  _ACKNOWLEDGE.fields_by_name['new_location'])
+_ACKNOWLEDGE.fields_by_name['new_location'].containing_oneof = _ACKNOWLEDGE.oneofs_by_name['_new_location']
+_ACKNOWLEDGE.oneofs_by_name['_kill'].fields.append(
+  _ACKNOWLEDGE.fields_by_name['kill'])
+_ACKNOWLEDGE.fields_by_name['kill'].containing_oneof = _ACKNOWLEDGE.oneofs_by_name['_kill']
 DESCRIPTOR.message_types_by_name['GameState'] = _GAMESTATE
+DESCRIPTOR.message_types_by_name['row'] = _ROW
+DESCRIPTOR.message_types_by_name['board'] = _BOARD
+DESCRIPTOR.message_types_by_name['move'] = _MOVE
+DESCRIPTOR.message_types_by_name['acknowledge'] = _ACKNOWLEDGE
 DESCRIPTOR.message_types_by_name['Guess'] = _GUESS
 DESCRIPTOR.message_types_by_name['Feedback'] = _FEEDBACK
 DESCRIPTOR.message_types_by_name['Name'] = _NAME
@@ -189,6 +417,34 @@ GameState = _reflection.GeneratedProtocolMessageType('GameState', (_message.Mess
   # @@protoc_insertion_point(class_scope:guessing_game.GameState)
   })
 _sym_db.RegisterMessage(GameState)
+
+row = _reflection.GeneratedProtocolMessageType('row', (_message.Message,), {
+  'DESCRIPTOR' : _ROW,
+  '__module__' : 'guessing_game_pb2'
+  # @@protoc_insertion_point(class_scope:guessing_game.row)
+  })
+_sym_db.RegisterMessage(row)
+
+board = _reflection.GeneratedProtocolMessageType('board', (_message.Message,), {
+  'DESCRIPTOR' : _BOARD,
+  '__module__' : 'guessing_game_pb2'
+  # @@protoc_insertion_point(class_scope:guessing_game.board)
+  })
+_sym_db.RegisterMessage(board)
+
+move = _reflection.GeneratedProtocolMessageType('move', (_message.Message,), {
+  'DESCRIPTOR' : _MOVE,
+  '__module__' : 'guessing_game_pb2'
+  # @@protoc_insertion_point(class_scope:guessing_game.move)
+  })
+_sym_db.RegisterMessage(move)
+
+acknowledge = _reflection.GeneratedProtocolMessageType('acknowledge', (_message.Message,), {
+  'DESCRIPTOR' : _ACKNOWLEDGE,
+  '__module__' : 'guessing_game_pb2'
+  # @@protoc_insertion_point(class_scope:guessing_game.acknowledge)
+  })
+_sym_db.RegisterMessage(acknowledge)
 
 Guess = _reflection.GeneratedProtocolMessageType('Guess', (_message.Message,), {
   'DESCRIPTOR' : _GUESS,
@@ -221,23 +477,53 @@ _GUESSINGGAME = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=165,
-  serialized_end=294,
+  serialized_start=520,
+  serialized_end=854,
   methods=[
   _descriptor.MethodDescriptor(
-    name='reply',
-    full_name='guessing_game.GuessingGame.reply',
+    name='check_state',
+    full_name='guessing_game.GuessingGame.check_state',
     index=0,
     containing_service=None,
-    input_type=_GUESS,
-    output_type=_FEEDBACK,
+    input_type=_NAME,
+    output_type=_ACKNOWLEDGE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
-    name='tell_name',
-    full_name='guessing_game.GuessingGame.tell_name',
+    name='make_move',
+    full_name='guessing_game.GuessingGame.make_move',
     index=1,
+    containing_service=None,
+    input_type=_NAME,
+    output_type=_ACKNOWLEDGE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='update_state',
+    full_name='guessing_game.GuessingGame.update_state',
+    index=2,
+    containing_service=None,
+    input_type=_NAME,
+    output_type=_ACKNOWLEDGE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='print_board',
+    full_name='guessing_game.GuessingGame.print_board',
+    index=3,
+    containing_service=None,
+    input_type=_NAME,
+    output_type=_ACKNOWLEDGE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='set_piece',
+    full_name='guessing_game.GuessingGame.set_piece',
+    index=4,
     containing_service=None,
     input_type=_NAME,
     output_type=_NAME,

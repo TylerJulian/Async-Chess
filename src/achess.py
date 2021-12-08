@@ -41,9 +41,8 @@ class aChessClient():
         x = self.locationx
         y = self.locationy
         if(self.type_of_piece == 'k'):
-            x = random.randrange(-1,1)
-            y = random.randrange(-1,1)
-       
+            x = random.randrange(-1,2)
+            y = random.randrange(-1,2)
             x = self.locationx + x
             y = self.locationy + y
             if(not inrange(x,y)):
@@ -52,7 +51,11 @@ class aChessClient():
                 
         new_move = encode_move(self.type_of_piece, x, y)
         return new_move
-        
+    def update_move(self, move):
+        piece, x, y = parse_move(move)
+        self.locationx = x
+        self.locationy = y
+        return move
 class aChessServer():
     size = 32
 
@@ -61,6 +64,7 @@ class aChessServer():
         for y in range(32):
             board[x][y] = "x"
     locations = {}
+    queue = [] # (name, move)
     
     def __init__(self, name):
         print(name)
@@ -69,13 +73,20 @@ class aChessServer():
         self.board[x][y] = name
         self.locations[name] = (x,y)
         #del locations[name]
+    def update_location(self, name, move):
+        piece, x, y = parse_move(move)
+        
+        ox,oy = self.locations[name]
+        self.board[ox][oy] = "x"
+        self.board[x][y] = name
+        self.locations[name] =(x, y)
 
     def print_board(self):
         board_str = ""
         for x in range(32):
             for y in range(32):
                 symbol = self.board[y][31 - x].decode('UTF-8')
-                print(x,y)
+                #print(x,y)
                 symbol = self.convert_symbol(symbol)
                 board_str += symbol
             board_str += "\n"
@@ -104,7 +115,7 @@ class aChessServer():
         if (code != 0):
             code = chr(code)
             code.encode("UTF-8")
-            code = code  + str("|")
+            code = code  + str(" |")
         else:
-            code = " |"
+            code = "  |"
         return code

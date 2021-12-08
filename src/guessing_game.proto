@@ -6,14 +6,11 @@ package guessing_game;
 
 
 service GuessingGame { // service ran on the server
-  rpc reply (Guess) returns (Feedback) {}
-  rpc tell_name (Name) returns (Name) {}
-  rpc check_state(Name) returns (GameState) {}
-  rpc make_move(Name) returns (GameState) {}
-  rpc update_state(Name) returns (GameState) {}
-  rpc update_board(move) returns (GameState) {}
-  rpc print_board(Name) returns (GameState) {}
-  rpc set_piece(Name) returns (Name) {}
+    rpc check_state(Name) returns (acknowledge) {}
+    rpc update_state(Name) returns (acknowledge) {}
+    rpc print_board(Name) returns (acknowledge) {}
+    rpc set_piece(Name) returns (Name) {}
+    rpc move(new_move) returns (acknowledge) {}
 }
 
 message GameState { 
@@ -26,20 +23,20 @@ message board {
 	repeated row board_row = 1;
 }
 
-message move{
-    string move = 1;
+message new_move{
+    string name = 1;
+    string new_move = 2;
 }
 
 message acknowledge{
-	string state = 1; // on, won, over
-	bool moving = 2; // yes, no
-	bool legal = 3; // yes, no
-	bool moved = 4; // yes, no if the piece actually moved
-	string check = 5; // no, or position of checking
-	string location = 6; // last location of piece
-	string new_location = 7; // new location of piece
-	bool kill = 8; // stop the node if kill is true (dead piece)
-	string color = 9; // color of your piece
+	optional string state = 1; // on, won, over
+	optional bool moving = 2; // yes, no
+	optional bool legal = 3; // yes, no
+	optional bool moved = 4; // yes, no if the piece actually moved
+	optional string check = 5; // no, or position of checking
+	optional string location = 6; // last location of piece
+	optional string new_location = 7; // new location of piece
+	optional bool kill = 8; // stop the node if kill is true (dead piece)
 	// add more when needed 
 }
 

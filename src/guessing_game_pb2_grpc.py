@@ -15,13 +15,28 @@ class GuessingGameStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.reply = channel.unary_unary(
-                '/guessing_game.GuessingGame/reply',
-                request_serializer=guessing__game__pb2.Guess.SerializeToString,
-                response_deserializer=guessing__game__pb2.Feedback.FromString,
+        self.check_state = channel.unary_unary(
+                '/guessing_game.GuessingGame/check_state',
+                request_serializer=guessing__game__pb2.Name.SerializeToString,
+                response_deserializer=guessing__game__pb2.acknowledge.FromString,
                 )
-        self.tell_name = channel.unary_unary(
-                '/guessing_game.GuessingGame/tell_name',
+        self.make_move = channel.unary_unary(
+                '/guessing_game.GuessingGame/make_move',
+                request_serializer=guessing__game__pb2.Name.SerializeToString,
+                response_deserializer=guessing__game__pb2.acknowledge.FromString,
+                )
+        self.update_state = channel.unary_unary(
+                '/guessing_game.GuessingGame/update_state',
+                request_serializer=guessing__game__pb2.Name.SerializeToString,
+                response_deserializer=guessing__game__pb2.acknowledge.FromString,
+                )
+        self.print_board = channel.unary_unary(
+                '/guessing_game.GuessingGame/print_board',
+                request_serializer=guessing__game__pb2.Name.SerializeToString,
+                response_deserializer=guessing__game__pb2.acknowledge.FromString,
+                )
+        self.set_piece = channel.unary_unary(
+                '/guessing_game.GuessingGame/set_piece',
                 request_serializer=guessing__game__pb2.Name.SerializeToString,
                 response_deserializer=guessing__game__pb2.Name.FromString,
                 )
@@ -31,13 +46,31 @@ class GuessingGameServicer(object):
     """service ran on the server
     """
 
-    def reply(self, request, context):
+    def check_state(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def tell_name(self, request, context):
+    def make_move(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def update_state(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def print_board(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def set_piece(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -46,13 +79,28 @@ class GuessingGameServicer(object):
 
 def add_GuessingGameServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'reply': grpc.unary_unary_rpc_method_handler(
-                    servicer.reply,
-                    request_deserializer=guessing__game__pb2.Guess.FromString,
-                    response_serializer=guessing__game__pb2.Feedback.SerializeToString,
+            'check_state': grpc.unary_unary_rpc_method_handler(
+                    servicer.check_state,
+                    request_deserializer=guessing__game__pb2.Name.FromString,
+                    response_serializer=guessing__game__pb2.acknowledge.SerializeToString,
             ),
-            'tell_name': grpc.unary_unary_rpc_method_handler(
-                    servicer.tell_name,
+            'make_move': grpc.unary_unary_rpc_method_handler(
+                    servicer.make_move,
+                    request_deserializer=guessing__game__pb2.Name.FromString,
+                    response_serializer=guessing__game__pb2.acknowledge.SerializeToString,
+            ),
+            'update_state': grpc.unary_unary_rpc_method_handler(
+                    servicer.update_state,
+                    request_deserializer=guessing__game__pb2.Name.FromString,
+                    response_serializer=guessing__game__pb2.acknowledge.SerializeToString,
+            ),
+            'print_board': grpc.unary_unary_rpc_method_handler(
+                    servicer.print_board,
+                    request_deserializer=guessing__game__pb2.Name.FromString,
+                    response_serializer=guessing__game__pb2.acknowledge.SerializeToString,
+            ),
+            'set_piece': grpc.unary_unary_rpc_method_handler(
+                    servicer.set_piece,
                     request_deserializer=guessing__game__pb2.Name.FromString,
                     response_serializer=guessing__game__pb2.Name.SerializeToString,
             ),
@@ -68,7 +116,7 @@ class GuessingGame(object):
     """
 
     @staticmethod
-    def reply(request,
+    def check_state(request,
             target,
             options=(),
             channel_credentials=None,
@@ -78,14 +126,14 @@ class GuessingGame(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/guessing_game.GuessingGame/reply',
-            guessing__game__pb2.Guess.SerializeToString,
-            guessing__game__pb2.Feedback.FromString,
+        return grpc.experimental.unary_unary(request, target, '/guessing_game.GuessingGame/check_state',
+            guessing__game__pb2.Name.SerializeToString,
+            guessing__game__pb2.acknowledge.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def tell_name(request,
+    def make_move(request,
             target,
             options=(),
             channel_credentials=None,
@@ -95,7 +143,58 @@ class GuessingGame(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/guessing_game.GuessingGame/tell_name',
+        return grpc.experimental.unary_unary(request, target, '/guessing_game.GuessingGame/make_move',
+            guessing__game__pb2.Name.SerializeToString,
+            guessing__game__pb2.acknowledge.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def update_state(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/guessing_game.GuessingGame/update_state',
+            guessing__game__pb2.Name.SerializeToString,
+            guessing__game__pb2.acknowledge.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def print_board(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/guessing_game.GuessingGame/print_board',
+            guessing__game__pb2.Name.SerializeToString,
+            guessing__game__pb2.acknowledge.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def set_piece(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/guessing_game.GuessingGame/set_piece',
             guessing__game__pb2.Name.SerializeToString,
             guessing__game__pb2.Name.FromString,
             options, channel_credentials,
