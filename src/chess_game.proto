@@ -2,10 +2,10 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 
-package guessing_game;
+package chess_game;
 
 
-service GuessingGame { // service ran on the server
+service ChessGame { // service ran on the server
     rpc check_state(Name) returns (acknowledge) {}
     rpc update_state(Name) returns (acknowledge) {}
     rpc print_board(Name) returns (acknowledge) {}

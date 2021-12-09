@@ -1,6 +1,5 @@
 import time
 import socket
-import guessing_game_pb2
 import grpc
 import grpc.experimental
 import random
@@ -10,22 +9,22 @@ random.seed()
 stat = "on" # "won", "over"
 ran_num = random.randint(0, 100000)
 
-import guessing_game_pb2_grpc
-import guessing_game_pb2
+import chess_game_pb2_grpc
+import chess_game_pb2
 
 import achess
 chess_server = achess.aChessServer(socket.gethostname())
 
-class GuessingGame(guessing_game_pb2_grpc.GuessingGameServicer):
+class ChessGame(chess_game_pb2_grpc.ChessGameServicer):
     def check_state(self, request, context):
-        return guessing_game_pb2.acknowledge()
+        return chess_game_pb2.acknowledge()
     def update_state(self, request, context):
-        return guessing_game_pb2.acknowledge()
+        return chess_game_pb2.acknowledge()
     def set_piece(self, request, context):
         name = request.name
         piece, x, y = achess.parse_move(name)
         chess_server.set_piece(name)
-        return guessing_game_pb2.acknowledge()
+        return chess_game_pb2.acknowledge()
     def move(self, request, context):
         move = chess_server.update_location(request.name, request.new_move)
         
@@ -35,27 +34,21 @@ class GuessingGame(guessing_game_pb2_grpc.GuessingGameServicer):
         else:
             kill = False
 
-        return guessing_game_pb2.acknowledge(state = chess_server.state, moved = move)
+        return chess_game_pb2.acknowledge(state = chess_server.state, moved = move)
 
 def server():
-    print("hello")
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    guessing_game_pb2_grpc.add_GuessingGameServicer_to_server(GuessingGame(), server)
+    chess_game_pb2_grpc.add_ChessGameServicer_to_server(ChessGame(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
     x = 0
     while(chess_server.state == "ongoing"):
         x = x + 1
-        if(x == 2):
-            chess_server.print_board()
-            x = 0
-        time.sleep(1)
     server.stop(3)
     #server.wait_for_termination()
 
 def client():
     name = socket.gethostname()
-    print(name + "client")
     client_name = name
     type_of_piece = name[0]
     location = name[1:3]
@@ -65,18 +58,18 @@ def client():
     response = ""
 
     with grpc.insecure_channel('server:50051') as channel:
-        stub = guessing_game_pb2_grpc.GuessingGameStub(channel)
-        name = guessing_game_pb2.Name(name = name)
+        stub = chess_game_pb2_grpc.ChessGameStub(channel)
+        name = chess_game_pb2.Name(name = name)
         response = stub.set_piece(name)
     count = 0
     while(ongoing == True):
 
         with grpc.insecure_channel('server:50051') as channel:
-            stub = guessing_game_pb2_grpc.GuessingGameStub(channel)
+            stub = chess_game_pb2_grpc.ChessGameStub(channel)
             move = game.move()
             moved = move
-            game.update_move(moved)
-            move = guessing_game_pb2.new_move(name = client_name, new_move = move)
+            
+            move = chess_game_pb2.new_move(name = client_name, new_move = move)
             move = stub.move(move)
             if(move.moved == True): # check if the piece actually moved.
                 game.update_move(moved)

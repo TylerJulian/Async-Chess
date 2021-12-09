@@ -17,7 +17,7 @@ services:
   client2:
     build: .
     hostname: k1631b
-    container_name: r1631b
+    container_name: k1631b
     networks:
       - default
 

@@ -76,6 +76,8 @@ class aChessServer():
         #del locations[name]
     def update_location(self, name, move):
         #print("debug 1")
+        print(chr(27) + "[2J")
+        self.print_board()
         piece, x, y = parse_move(move)
         
         ox,oy = self.locations[name] # old x old y
@@ -97,10 +99,11 @@ class aChessServer():
                 self.board[ox][oy] = b'x'
                 self.locations[name] = (x, y)
                 self.locations[occupied.decode('UTF-8')] = (-1,-1)
-                print(occupied.decode('UTF-8'))
+                #print(occupied.decode('UTF-8'))
                 occupied = occupied.decode('UTF-8')
                 if (occupied[0:1] == 'k'):
                     self.state = "over"
+                    print("endstate")
                     self.print_board()
                 return True
             return False
