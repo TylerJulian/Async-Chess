@@ -22,7 +22,7 @@ class ChessGame(chess_game_pb2_grpc.ChessGameServicer):
         return chess_game_pb2.acknowledge()
     def set_piece(self, request, context):
         name = request.name
-        piece, x, y = achess.parse_move(name)
+        piece, x, y, color = achess.parse_move(name)
         chess_server.set_piece(name)
         return chess_game_pb2.acknowledge()
     def move(self, request, context):
@@ -44,6 +44,7 @@ def server():
     x = 0
     while(chess_server.state == "ongoing"):
         x = x + 1
+    time.sleep(1)
     server.stop(3)
     #server.wait_for_termination()
 
@@ -52,6 +53,8 @@ def client():
     client_name = name
     type_of_piece = name[0]
     location = name[1:3]
+    color = name[5:6]
+    print(color)
     game = achess.aChessClient(client_name)
     ongoing = True
 

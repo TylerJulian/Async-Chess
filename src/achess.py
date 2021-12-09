@@ -6,12 +6,14 @@ def parse_move(move):
     piece = move[0]
     x = int(move[1:3])
     y = int(move[3:5])
-    return piece, x, y
-def encode_move(piece, x, y):
+    color = move[5:6]
+    return piece, x, y, color
+def encode_move(piece, x, y, color):
     move = ""
     move += piece[0]
     move += str(x).zfill(2)
     move += str(y).zfill(2)
+    move += color[0]
     return move
 def inrange(x, y):
     if (-1 < x < 32) & (-1 < y < 32):
@@ -30,12 +32,13 @@ class aChessClient():
     location = ""
     locationx = ""
     locationy = ""
+    color = ""
     
     #print(board)
     def __init__(self, name):
         self.name = name[0:6]
         self.location = name[1:4]
-        self.type_of_piece, self.locationx, self.locationy = parse_move(self.name)
+        self.type_of_piece, self.locationx, self.locationy, self.color = parse_move(self.name)
         
 
     def move(self):
@@ -49,11 +52,19 @@ class aChessClient():
             if(not inrange(x,y)):
                 x = self.locationx
                 y = self.locationy
+        if(self.type_of_piece == 'q'):
+            x = random.randrange(-16,16)
+            y = random.randrange(-16,16)
+            x = self.locationx + x
+            y = self.locationy + y
+            if(not inrange(x,y)):
+                x = self.locationx
+                y = self.locationy
                 
-        new_move = encode_move(self.type_of_piece, x, y)
+        new_move = encode_move(self.type_of_piece, x, y, self.color)
         return new_move
     def update_move(self, move):
-        piece, x, y = parse_move(move)
+        piece, x, y, color = parse_move(move)
         self.locationx = x
         self.locationy = y
         return move
@@ -70,7 +81,7 @@ class aChessServer():
     def __init__(self, name):
         print(name)
     def set_piece(self, name):
-        piece, x, y = parse_move(name)
+        piece, x, y, color = parse_move(name)
         self.board[x][y] = name
         self.locations[name] = (x,y)
         #del locations[name]
@@ -78,7 +89,9 @@ class aChessServer():
         #print("debug 1")
         print(chr(27) + "[2J")
         self.print_board()
-        piece, x, y = parse_move(move)
+        piece, x, y, color = parse_move(move)
+        piecen, xn, yn, colorn = parse_move(name)
+
         
         ox,oy = self.locations[name] # old x old y
         if(ox == -1):
@@ -86,11 +99,11 @@ class aChessServer():
         if (self.board[x][y] == b'x'):
             self.board[x][y] = name
             self.board[ox][oy] = b'x'
-            self.locations[name] =(x, y)
+            self.locations[name] = (x, y)
             return True
         else:
             occupied = self.board[x][y]
-            if (occupied[5:6] == name[5:6]):
+            if (occupied.decode('UTF-8')[5:6] == name[5:6]):
                 return False
             else:
                 if(occupied.decode('UTF-8') == name):
@@ -103,7 +116,6 @@ class aChessServer():
                 occupied = occupied.decode('UTF-8')
                 if (occupied[0:1] == 'k'):
                     self.state = "over"
-                    print("endstate")
                     self.print_board()
                 return True
             return False

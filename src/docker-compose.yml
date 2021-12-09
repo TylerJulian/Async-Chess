@@ -16,11 +16,22 @@ services:
       - default
   client2:
     build: .
+    hostname: q1500w
+    container_name: q1500w
+    networks:
+      - default
+  client3:
+    build: .
     hostname: k1631b
     container_name: k1631b
     networks:
       - default
-
+  client5:
+    build: .
+    hostname: q1531b
+    container_name: q1531b
+    networks:
+      - default
 
       
 
