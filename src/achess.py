@@ -60,6 +60,13 @@ class aChessClient():
             if(not inrange(x,y)):
                 x = self.locationx
                 y = self.locationy
+        if(self.type_of_piece == 'p'):
+            x = self.locationx
+            y = self.locationy + 1
+            if(not inrange(x,y)):
+                x = self.locationx
+                y = self.locationy
+                self.type_of_piece = 'q'
                 
         new_move = encode_move(self.type_of_piece, x, y, self.color)
         return new_move
@@ -87,8 +94,7 @@ class aChessServer():
         #del locations[name]
     def update_location(self, name, move):
         #print("debug 1")
-        print(chr(27) + "[2J")
-        self.print_board()
+        #self.print_board()
         piece, x, y, color = parse_move(move)
         piecen, xn, yn, colorn = parse_move(name)
 

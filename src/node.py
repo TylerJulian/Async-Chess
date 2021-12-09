@@ -43,7 +43,9 @@ def server():
     server.start()
     x = 0
     while(chess_server.state == "ongoing"):
-        x = x + 1
+        print(chr(27) + "[2J")
+        chess_server.print_board()
+        time.sleep(.02)
     time.sleep(1)
     server.stop(3)
     #server.wait_for_termination()
