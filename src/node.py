@@ -44,8 +44,12 @@ def server():
     x = 0
     while(chess_server.state == "ongoing"):
         print(chr(27) + "[2J")
+        if(chess_server.count < 32):
+            print(chess_server.count)
+
         chess_server.print_board()
-        time.sleep(.03)
+        
+        time.sleep(.1)
     time.sleep(1)
     server.stop(3)
     #server.wait_for_termination()
@@ -92,11 +96,8 @@ def client():
 if (socket.gethostname() == "server"):
     server()
 else:
-    try:
-        notdone = True
-        while(notdone):
-            client()
-            notdone = False
-    except:
-        print("fail")
+    time.sleep(15)
+
+    client()
+
 

@@ -53,7 +53,7 @@ class aChessClient():
                 x = self.locationx
                 y = self.locationy
         if(self.type_of_piece == 'q'):
-            dir = random.rangrange(-1,5)
+            dir = random.randrange(-1,5)
             x = random.randrange(-16,17)
             if(dir == 0):
                 #vertical
@@ -83,7 +83,19 @@ class aChessClient():
                 y = self.locationy
                 self.type_of_piece = 'q'
         if(self.type_of_piece == 'r'):
-            dir = random.randrange(0,2)
+            dir = random.randrange(-1,2)
+            x = random.randrange(-16,17)
+            if(dir == 0):
+                #vertical
+                x = self.locationx
+                y = self.locationy + x
+            if(dir == 1):
+                #horizontal
+                x = self.locationx + x
+                y = self.locationy
+            if(not inrange(x,y)):
+                x = self.locationx
+                y = self.locationy
         new_move = encode_move(self.type_of_piece, x, y, self.color)
         return new_move
     def update_move(self, move):
@@ -113,8 +125,8 @@ class aChessServer():
     def update_location(self, name, move):
         #print("debug 1")
         #self.print_board()
-        if(self.count < 10):
-            return false
+        if(self.count < 33):
+            return False
         piece, x, y, color = parse_move(move)
         piecen, xn, yn, colorn = parse_move(name)
 
