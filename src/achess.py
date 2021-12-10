@@ -53,10 +53,25 @@ class aChessClient():
                 x = self.locationx
                 y = self.locationy
         if(self.type_of_piece == 'q'):
-            x = random.randrange(-16,16)
-            y = random.randrange(-16,16)
-            x = self.locationx + x
-            y = self.locationy + y
+            dir = random.rangrange(-1,5)
+            x = random.randrange(-16,17)
+            if(dir == 0):
+                #vertical
+                x = self.locationx
+                y = self.locationy + x
+            if(dir == 1):
+                #horizontal
+                x = self.locationx + x
+                y = self.locationy
+            if(dir == 2):
+                #diag left
+                x = self.locationx + x
+                y = self.locationy - x
+            if(dir == 3):
+                #diag right
+                x = self.locationx - x
+                y = self.locationy + x
+
             if(not inrange(x,y)):
                 x = self.locationx
                 y = self.locationy
@@ -67,7 +82,8 @@ class aChessClient():
                 x = self.locationx
                 y = self.locationy
                 self.type_of_piece = 'q'
-                
+        if(self.type_of_piece == 'r'):
+            dir = random.randrange(0,2)
         new_move = encode_move(self.type_of_piece, x, y, self.color)
         return new_move
     def update_move(self, move):
@@ -77,6 +93,7 @@ class aChessClient():
         return move
 class aChessServer():
     size = 32
+    count = 0
     state = "ongoing" # over # ending
     board = numpy.empty((32,32), dtype = '|S6')
     for x in range(32):
@@ -91,10 +108,13 @@ class aChessServer():
         piece, x, y, color = parse_move(name)
         self.board[x][y] = name
         self.locations[name] = (x,y)
+        self.count = self.count + 1
         #del locations[name]
     def update_location(self, name, move):
         #print("debug 1")
         #self.print_board()
+        if(self.count < 10):
+            return false
         piece, x, y, color = parse_move(move)
         piecen, xn, yn, colorn = parse_move(name)
 

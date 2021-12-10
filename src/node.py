@@ -37,7 +37,7 @@ class ChessGame(chess_game_pb2_grpc.ChessGameServicer):
         return chess_game_pb2.acknowledge(state = chess_server.state, moved = move)
 
 def server():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(futures.ThreadPoolExecutor())
     chess_game_pb2_grpc.add_ChessGameServicer_to_server(ChessGame(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
@@ -45,7 +45,7 @@ def server():
     while(chess_server.state == "ongoing"):
         print(chr(27) + "[2J")
         chess_server.print_board()
-        time.sleep(.02)
+        time.sleep(.03)
     time.sleep(1)
     server.stop(3)
     #server.wait_for_termination()
@@ -56,7 +56,7 @@ def client():
     type_of_piece = name[0]
     location = name[1:3]
     color = name[5:6]
-    print(color)
+    
     game = achess.aChessClient(client_name)
     ongoing = True
 
@@ -73,7 +73,7 @@ def client():
             stub = chess_game_pb2_grpc.ChessGameStub(channel)
             move = game.move()
             moved = move
-            
+
             move = chess_game_pb2.new_move(name = client_name, new_move = move)
             move = stub.move(move)
             if(move.moved == True): # check if the piece actually moved.
@@ -92,6 +92,11 @@ def client():
 if (socket.gethostname() == "server"):
     server()
 else:
-    time.sleep(3)
-    client()
+    try:
+        notdone = True
+        while(notdone):
+            client()
+            notdone = False
+    except:
+        print("fail")
 

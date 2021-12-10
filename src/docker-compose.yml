@@ -22,22 +22,53 @@ services:
       - default
   client9:
     build: .
-    hostname: p0001w
-    container_name: p0001w
+    hostname: p1301w
+    container_name: p1301w
     networks:
       - default
   client10:
     build: .
-    hostname: p0002w
-    container_name: p0002w
+    hostname: p1401w
+    container_name: p1401w
     networks:
       - default
   client11:
     build: .
-    hostname: p0003w
-    container_name: p0003w
+    hostname: p1501w
+    container_name: p1501w
     networks:
       - default
+  client12:
+    build: .
+    hostname: p1601w
+    container_name: p1601w
+    networks:
+      - default
+  client13:
+    build: .
+    hostname: p1701w
+    container_name: p1701w
+    networks:
+      - default
+  client14:
+    build: .
+    hostname: p1801w
+    container_name: p1801w
+    networks:
+      - default
+  client15:
+    build: .
+    hostname: p1901w
+    container_name: p1901w
+    networks:
+      - default
+  client16:
+    build: .
+    hostname: p2001w
+    container_name: p2001w
+    networks:
+      - default
+
   client17:
     build: .
     hostname: k1631b
