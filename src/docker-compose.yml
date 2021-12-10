@@ -34,26 +34,26 @@ services:
       - default
   client5:
     build: .
-    hostname: r1300w
-    container_name: r1300w
+    hostname: n1300w
+    container_name: n1300w
     networks:
       - default
   client6:
     build: .
-    hostname: r1800w
-    container_name: r1800w
+    hostname: n1800w
+    container_name: n1800w
     networks:
       - default
   client7:
     build: .
-    hostname: r1400w
-    container_name: r1400w
+    hostname: b1400w
+    container_name: b1400w
     networks:
       - default
   client8:
     build: .
-    hostname: r1700w
-    container_name: r1700w
+    hostname: b1700w
+    container_name: b1700w
     networks:
       - default
   client16:
@@ -132,25 +132,25 @@ services:
       - default
   client21:
     build: .
-    hostname: r1331b
-    container_name: r1331b
+    hostname: n1331b
+    container_name: n1331b
     networks:
       - default
   client22:
     build: .
-    hostname: r1831b
-    container_name: r1831b
+    hostname: n1831b
+    container_name: n1831b
     networks:
       - default
   client23:
     build: .
-    hostname: r1431b
+    hostname: b1431b
     container_name: r1431b
     networks:
       - default
   client24:
     build: .
-    hostname: r1731b
+    hostname: b1731b
     container_name: r1731b
     networks:
       - default

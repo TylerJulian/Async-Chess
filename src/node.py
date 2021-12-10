@@ -37,17 +37,18 @@ class ChessGame(chess_game_pb2_grpc.ChessGameServicer):
         return chess_game_pb2.acknowledge(state = chess_server.state, moved = move)
 
 def server():
-    server = grpc.server(futures.ThreadPoolExecutor())
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers = 32))
     chess_game_pb2_grpc.add_ChessGameServicer_to_server(ChessGame(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
     x = 0
     while(chess_server.state == "ongoing"):
-        print(chr(27) + "[2J")
+        #print(chr(27) + "[2J")
         if(chess_server.count < 32):
             print(chess_server.count)
 
-        chess_server.print_board()
+        else: 
+            chess_server.print_board()
         
         time.sleep(.1)
     time.sleep(1)

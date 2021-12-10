@@ -76,8 +76,12 @@ class aChessClient():
                 x = self.locationx
                 y = self.locationy
         if(self.type_of_piece == 'p'):
-            x = self.locationx
-            y = self.locationy + 1
+            if(self.color == 'w'):
+                x = self.locationx
+                y = self.locationy + 1
+            else:
+                x = self.locationx
+                y = self.locationy - 1
             if(not inrange(x,y)):
                 x = self.locationx
                 y = self.locationy
@@ -93,6 +97,59 @@ class aChessClient():
                 #horizontal
                 x = self.locationx + x
                 y = self.locationy
+            if(not inrange(x,y)):
+                x = self.locationx
+                y = self.locationy
+        if(self.type_of_piece == 'b'):
+            dir = random.randrange(-1,2)
+            x = random.randrange(-16,17)
+            if(dir == 0):
+                #diag left
+                x = self.locationx - x
+                y = self.locationy + x
+            if(dir == 1):
+                #diag right
+                x = self.locationx + x
+                y = self.locationy - x
+            if(not inrange(x,y)):
+                x = self.locationx
+                y = self.locationy
+        if(self.type_of_piece == 'n'):
+            dir = random.randrange(-1,8)
+            x = random.randrange(-16,17)
+            if(dir == 0):
+                #up right
+                y = self.locationy + 2
+                x = self.locationx - 1
+            if(dir == 1):
+                #up left
+                y = self.locationy + 2
+                x = self.locationx + 1
+            if(dir == 2):
+                #down right
+                x = self.locationx - 2
+                y = self.locationy + 1
+            if(dir == 3):
+                #down left
+                x = self.locationx - 2
+                y = self.locationy + 1
+
+            if(dir == 4):
+                #left up
+                x = self.locationx + 1
+                y = self.locationy - 2
+            if(dir == 5):
+                #left down
+                x = self.locationx - 1
+                y = self.locationy - 2
+            if(dir == 6):
+                #right up
+                x = self.locationx + 1
+                y = self.locationy + 2
+            if(dir == 7):
+                #right down
+                x = self.locationx - 1
+                y = self.locationy + 2
             if(not inrange(x,y)):
                 x = self.locationx
                 y = self.locationy
@@ -125,7 +182,7 @@ class aChessServer():
     def update_location(self, name, move):
         #print("debug 1")
         #self.print_board()
-        if(self.count < 33):
+        if(self.count < 32):
             return False
         piece, x, y, color = parse_move(move)
         piecen, xn, yn, colorn = parse_move(name)
