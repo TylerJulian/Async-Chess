@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package guessing_game;
+
+
+service GuessingGame { // service ran on the server
+    rpc check_state(Name) returns (acknowledge) {}
+    rpc update_state(Name) returns (acknowledge) {}
+    rpc print_board(Name) returns (acknowledge) {}
+    rpc set_piece(Name) returns (Name) {}
+    rpc move(new_move) returns (acknowledge) {}
+}
+
+message GameState { 
+	string state = 1;
+}
+message row{
+	repeated string item = 1;
+}
+message board {
+	repeated row board_row = 1;
+}
+
+message new_move{
+    string name = 1;
+    string new_move = 2;
+}
+
+message acknowledge{
+	optional string state = 1; // on, won, over
+	optional bool moving = 2; // yes, no
+	optional bool legal = 3; // yes, no
+	optional bool moved = 4; // yes, no if the piece actually moved
+	optional string check = 5; // no, or position of checking
+	optional string location = 6; // last location of piece
+	optional string new_location = 7; // new location of piece
+	optional bool kill = 8; // stop the node if kill is true (dead piece)
+	// add more when needed 
+}
+
+message Guess {
+  int32 guess = 1;
+}
+
+message Feedback{
+	string feed = 1;
+
+}
+
+message Name {
+  string name = 1;
+}
+
