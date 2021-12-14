@@ -25,9 +25,9 @@ The following technologies were used in my implementation.
         -socket, get hostname of the clients (usernames of players)
         -time, This is used for the 10 hz refresh rate of the game board.
         -grpc, see above for the grpc uses.
-    - (Docker)[https://www.docker.com/] , Docker was used to launch the 32 clients and the server.
-    - (gRPC)[https://www.grpc.io/docs/what-is-grpc/introduction/], gRPC handled the queue and the messages between the client and server.
-    - (protool buffers)[https://developers.google.com/protocol-buffers], Protocol buffers provided the messages sent between the server and client.
+    - [Docker](https://www.docker.com/) , Docker was used to launch the 32 clients and the server.
+    - [gRPC](https://www.grpc.io/docs/what-is-grpc/introduction/), gRPC handled the queue and the messages between the client and server.
+    - [protool buffers](https://developers.google.com/protocol-buffers), Protocol buffers provided the messages sent between the server and client.
 
 The project can be ran by running the startup.bash file in the src folder. 
 
