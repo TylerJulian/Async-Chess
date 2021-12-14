@@ -44,7 +44,7 @@ The scalability of the implementation allows me to test the functionality of the
 
 You can also slow down the clients using waits to see the exact moves that the clients are making. This type of testing ensures that the clients are making non illegal moves and if they are making illegal moves, then the illegal moves are rejected. 
 
-A smaller board can be used as well to ensure that each of the pieces are functioning correctly. The major aspect to test using this method is to make sure pieces aren't moving out of bound or that pieces are capturing other pieces correctly.
+A smaller board can be used as well to ensure that each of the pieces are functioning correctly. The major aspect to test using this method is to make sure pieces aren't moving out of bounds or that pieces are capturing other pieces correctly.
 
 # Implementation tools
 The following technologies were used in my implementation. 
@@ -56,11 +56,14 @@ The following technologies were used in my implementation.
         -grpc, see above for the grpc uses.
     - [Docker](https://www.docker.com/) , Docker was used to launch the 32 clients and the server.
     - [gRPC](https://www.grpc.io/docs/what-is-grpc/introduction/), gRPC handled the queue and the messages between the client and server.
-    - [protool buffers](https://developers.google.com/protocol-buffers), Protocol buffers provided the messages sent between the server and client.
+    - [protocol buffers](https://developers.google.com/protocol-buffers), Protocol buffers provided the messages sent between the server and client.
 
 The project can be ran by running the startup.bash file in the src folder. 
 
 
 # Links
-The project video can be found here. Click on the thumbnail.
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+The project infomercial video can be found here. Click on the thumbnail.
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/thum/0.jpg)](https://youtu.be/thum)
+
+The demo can be found here. Click on the thumbnail.
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/2hLFTHyUBrk/0.jpg)](https://youtu.be/2hLFTHyUBrk)
