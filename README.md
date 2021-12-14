@@ -63,7 +63,7 @@ The project can be ran by running the startup.bash file in the src folder.
 
 # Links
 The project infomercial video can be found here. Click on the thumbnail.
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/thum/0.jpg)](https://youtu.be/thum)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/v4BoQhuV4mg/0.jpg)](https://youtu.be/v4BoQhuV4mg)
 
 The demo can be found here. Click on the thumbnail.
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/2hLFTHyUBrk/0.jpg)](https://youtu.be/2hLFTHyUBrk)
