@@ -60,6 +60,7 @@ The following technologies were used in my implementation.
 
 The project can be ran by running the startup.bash file in the src folder. 
 
+![Demo]demo.gif)
 
 # Links
 The project infomercial video can be found here. Click on the thumbnail.
